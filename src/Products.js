@@ -1,4 +1,23 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
+const Card = styled.button`
+  border-radius: 3px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+  max-width: 300px;
+  margin: 10px;
+`;
+
+const Button = styled.span`
+  border-radius: 3px;
+  padding: 0.25em 1em;
+  margin: 0 1em;
+  background: transparent;
+  color: palevioletred;
+  border: 2px solid palevioletred;
+`;
 
 class Products extends Component {
 	constructor(props){
@@ -28,12 +47,12 @@ class Products extends Component {
 			<div>
 			{this.state.data.map((product) =>{
 				return (
-					<div key={product.filename}>
-						<img src={"https://raw.githubusercontent.com/Sellbrite/fe-sample-project/master/images/" + product.filename} />
+					<Card key={product.filename}>
+						<img src={"https://raw.githubusercontent.com/Sellbrite/fe-sample-project/master/images/" + product.filename} width="100%"/>
 						<h3>{product.name}</h3>
 						<h1>${(product.price) * .01}</h1>
-						<div onClick={() => this.addToCart(product.filename)}>add to cart</div>
-					</div>
+						<Button onClick={() => this.addToCart(product.filename)}>add to cart</Button>
+					</Card>
 				)
 			})}
 			</div>
