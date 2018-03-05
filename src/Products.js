@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Card = styled.button`
+  font-family: 'Lato', sans-serif;
   border-radius: 3px;
   padding: 10px;
   background-color: white;
@@ -10,13 +11,14 @@ const Card = styled.button`
   margin: 10px;
 `;
 
-const Button = styled.span`
+const Button = styled.div`
   border-radius: 3px;
-  padding: 0.25em 1em;
-  margin: 0 1em;
+  padding: 5px;
+  margin: 0 auto;
   background: transparent;
-  color: palevioletred;
-  border: 2px solid palevioletred;
+  color: black;
+  border: 1px solid #ccc;
+  width: 100px;
 `;
 
 class Products extends Component {
