@@ -40,7 +40,7 @@ function CartOverlay(props) {
       {props.cart.map((product) => {
         return (
           <h3>{product.name}</h3>
-          )
+          );
       })}
     </Overlay>
 
