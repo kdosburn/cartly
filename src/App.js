@@ -30,10 +30,27 @@ const Button = styled.div`
   width: 100px;
 `;
 
+function CartOverlay(props) {
+  if (!props.show) {
+    return null;
+  }
+
+  return (
+    <Overlay>
+      {props.cart.map((product) => {
+        return (
+          <h3>{product.name}</h3>
+          )
+      })}
+    </Overlay>
+
+  );
+}
+
 class App extends Component {
   constructor(props){
     super(props)
-    this.state = { cart: [], data: [], value: 0 }
+    this.state = { cart: [], data: [], value: 0, showCart: false }
     this.addToCart = this.addToCart.bind(this);
     this.updateTotal = this.updateTotal.bind(this);
     this.showCart = this.showCart.bind(this);
@@ -69,18 +86,22 @@ class App extends Component {
   showCart(){
     console.log('SHOWING CART!!!');
     console.log(this.state.cart);
-
+    this.setState(prevState => ({
+      showCart: !prevState.showCart
+    }));
   }
 
 
   render() {
+    const showCart = this.state.showCart;
+    const cart = this.state.cart;
     return (
       <div className="App">
-        <Overlay />
         <div className="nav-bar">
           <div className="nav-bar-name">Cart.ly</div>
           <div className="nav-bar-cart"><span onClick={() => this.showCart()}>My Cart </span> {this.state.value}</div>
         </div>
+        <CartOverlay show={this.state.showCart} cart={this.state.cart}/>
         <div>
         {this.state.data.map((product) =>{
           return (
