@@ -24,9 +24,7 @@ const Button = styled.div`
 class Products extends Component {
 	constructor(props){
 		super(props)
-		this.state = { data: [], cart: [] }
-		this.addToCart = this.addToCart.bind(this);
-		this.updateTotal = this.updateTotal.bind(this);
+		this.state = { data: [] }
 	}
 
 	getProducts(){
@@ -36,18 +34,6 @@ class Products extends Component {
 				this.setState({data: data.products})
 			})
 			.catch(err => console.err(this.props.url))
-	}
-
-	updateTotal(){
-		console.log('cart', this.state.cart);
-		let itemsInCart = this.state.cart.length;
-	}
-
-	addToCart(product){
-		console.log('product', product);
-		this.setState((prevState) =>
-			{ cart: prevState.cart.push(product)});
-		this.updateTotal();
 	}
 
 	componentDidMount(){
@@ -63,7 +49,7 @@ class Products extends Component {
 						<img src={"https://raw.githubusercontent.com/Sellbrite/fe-sample-project/master/images/" + product.filename} width="100%"/>
 						<h3>{product.name}</h3>
 						<h1>${(product.price * .01).toFixed(2)}</h1>
-						<Button onClick={() => this.addToCart(product)}>Add to Cart</Button>
+						<Button onClick={() => this.props.onClick(this.state.props)}>Add to Cart</Button>
 					</Card>
 				)
 			})}

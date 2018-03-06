@@ -24,14 +24,23 @@
 }
 
 .nav-bar {
-  width: 100%;
   background-color: blue;
   color: white;
   padding: 10px;
   text-align: left;
   font-size: 32px;
+  min-height: 40px;
+  margin: 0 auto;
+  padding: 10px;
 }
 
+.nav-bar-name {
+  float: left;
+}
+
+.nav-bar-cart {
+  float: right;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
