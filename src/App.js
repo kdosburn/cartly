@@ -38,7 +38,7 @@ const CartOverlay = (props) => {
     <Overlay>
       {props.cart.map((product) => {
         return (
-          <h3>{product.name}</h3>
+          <h3 key={product.filename}>{product.name}</h3>
           );
       })}
     </Overlay>
@@ -72,9 +72,7 @@ class App extends Component {
   }
   updateTotal(){
     console.log('cart', this.state.cart);
-    let itemsInCart = this.state.cart.length;
-    console.log(itemsInCart);
-    this.setState({ value: +1 });
+    this.setState({ value: this.state.cart.length + 1});
   }
   showCart(){
     console.log('SHOWING CART!!!');
@@ -82,6 +80,9 @@ class App extends Component {
     this.setState(prevState => ({
       showCart: !prevState.showCart
     }));
+  }
+  removeFromCart(product){
+    console.log('removing');
   }
   render() {
     const { showCart, cart } = this.state;
@@ -92,7 +93,7 @@ class App extends Component {
           <div className="nav-bar-name">Cart.ly</div>
           <div className="nav-bar-cart"><span onClick={() => this.showCart()}>My Cart </span> {this.state.value}</div>
         </div>
-        <CartOverlay show={showCart} cart={cart}/>
+        <CartOverlay show={showCart} cart={cart} />
         <div>
         {this.state.data.map((product) =>{
           return (
