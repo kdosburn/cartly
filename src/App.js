@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
 import styled from 'styled-components';
+import './App.css';
 
 const Overlay = styled.div`
   background-color: rgba(255, 255, 255, 0.6);
@@ -30,11 +30,10 @@ const Button = styled.div`
   width: 100px;
 `;
 
-function CartOverlay(props) {
+const CartOverlay = (props) => {
   if (!props.show) {
     return null;
   }
-
   return (
     <Overlay>
       {props.cart.map((product) => {
@@ -43,7 +42,6 @@ function CartOverlay(props) {
           );
       })}
     </Overlay>
-
   );
 }
 
@@ -55,7 +53,6 @@ class App extends Component {
     this.updateTotal = this.updateTotal.bind(this);
     this.showCart = this.showCart.bind(this);
   }
-
   getProducts(){
     fetch('https://raw.githubusercontent.com/Sellbrite/fe-sample-project/master/product-payload.json')
       .then(response => response.json())
@@ -64,25 +61,21 @@ class App extends Component {
       })
       .catch(err => console.err(this.props.url))
   }
-
   componentDidMount(){
     this.getProducts()
   }
-
   addToCart(product){
     console.log('product', product);
     this.setState((prevState) =>
       { cart: prevState.cart.push(product)});
     this.updateTotal();
   }
-
   updateTotal(){
     console.log('cart', this.state.cart);
     let itemsInCart = this.state.cart.length;
     console.log(itemsInCart);
     this.setState({ value: +1 });
   }
-
   showCart(){
     console.log('SHOWING CART!!!');
     console.log(this.state.cart);
@@ -90,18 +83,16 @@ class App extends Component {
       showCart: !prevState.showCart
     }));
   }
-
-
   render() {
-    const showCart = this.state.showCart;
-    const cart = this.state.cart;
+    const { showCart, cart } = this.state;
+
     return (
       <div className="App">
         <div className="nav-bar">
           <div className="nav-bar-name">Cart.ly</div>
           <div className="nav-bar-cart"><span onClick={() => this.showCart()}>My Cart </span> {this.state.value}</div>
         </div>
-        <CartOverlay show={this.state.showCart} cart={this.state.cart}/>
+        <CartOverlay show={showCart} cart={cart}/>
         <div>
         {this.state.data.map((product) =>{
           return (
@@ -118,5 +109,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
